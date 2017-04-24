@@ -1,15 +1,22 @@
 .name "stayin' alive"
 .comment "Ha, Ha, Ha, stayiiiiin' aliiiiiiiiiive"
-		ld %5, r2
-		ld %20, r3
+	
+sti	r1, %:live, %1
+sti	r1, %:live2, %1
+ld	%1, r3
+ld	%33, r6
+forks:
+add	r2, r3, r2
+xor	r2, %15, r4
+live2:
+	live 	%4
+zjmp	%:endwhile
+fork	%:forks
+ld	%0, r4
+zjmp	%:forks
+endwhile:
+ld	%0, r4
 
-live:	sti r2, r2, r3
-		add r2, r3, r3
-		ld %0, r5
-		zjmp %:live
-		 
-
-# label:	
-# 		sti r2, r2, %30
-# 		add r2, r3, r2
-
+live:
+live %4
+zjmp %:live
