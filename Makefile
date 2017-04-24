@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: egaborea <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: atoupart <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/01/29 10:16:34 by egaborea          #+#    #+#              #
+#    Created: 2016/01/29 10:16:34 by atoupart          #+#    #+#              #
 #    Updated: 2017/02/23 16:37:13 by hchaucha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ASM_PATH = ./asm
-WAR_PATH = ./corewar
+ASM_PATH = ./asm_dir
+WAR_PATH = ./corewar_dir
 
 all:
 	@make -C $(ASM_PATH) all
@@ -20,7 +20,7 @@ all:
 asm:
 	@make -C $(ASM_PATH) all
 
-corewar: 
+corewar:
 	@make -C $(WAR_PATH) all
 
 clean: 
