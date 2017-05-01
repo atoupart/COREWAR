@@ -12,9 +12,25 @@
 
 #include "../../inc/asm.h"
 
+int		count_apos(char *line)
+{
+	int		i;
+	int		ret;
+
+	i = 0;
+	ret = 0;
+	while (line[i] && ret < 2)
+	{
+		if (line[i] == '"')
+			ret++;
+		i++;
+	}
+return (ret);
+}
+
 int		check_name(char **line, int *name)
 {
-	if (ft_space_tab_str(*line, ".name", 1) == 1)
+	if (ft_space_tab_str(*line, ".name", 1) == 1 && (count_apos(*line) == 2))
 		*name = 1;
 	else
 	{
