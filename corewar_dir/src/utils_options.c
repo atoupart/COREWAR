@@ -35,6 +35,7 @@ void			init_option(t_opt *opt)
 	opt->dump_close = 0;
 	opt->dump_break = 0;
 	opt->cycle = 0;
+	opt->jump = 0;
 }
 
 void			check_opt(t_tool *tool)

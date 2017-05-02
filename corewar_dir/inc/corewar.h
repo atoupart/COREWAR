@@ -161,6 +161,7 @@ void					add_to_champlst(t_champ **lst, t_trash *trash);
 **						read_file.c
 */
 
+void					verif_size_champs(t_champ *champ, int ret, int fd);
 void					read_file(int fd, t_champ **champ, int id_champ);
 char					*get_champion_file(char *file, int nb_octet,
 						int i, int champ_len);

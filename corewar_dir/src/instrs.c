@@ -25,10 +25,10 @@ void		inside_live(t_tool *t, t_process *p, t_champ *tmp)
 		tmp2 = tmp2->next;
 	}
 	tmp->live_on = 1;
-	if (!t->opt.ncurse && !t->opt.verbose &&
-		!t->opt.dump_close && !t->opt.dump_break)
-		ft_printf("Un processus dit que le joueur %d(%s) est en vie\n",
-			tmp->id_champ, tmp->name);
+	// if (!t->opt.ncurse && !t->opt.verbose &&
+	// 	!t->opt.dump_close && !t->opt.dump_break)
+	// 	ft_printf("Un processus dit que le joueur %d(%s) est en vie\n",
+	// 		tmp->id_champ, tmp->name);
 }
 
 int			op_live(t_tool *t, t_process *p)

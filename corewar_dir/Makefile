@@ -85,7 +85,7 @@ clean:
 	@rmdir $(OBJ_PATH) 2> /dev/null || echo "" > /dev/null
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f ../$(NAME)
 	@make -C $(LIB_PATH) fclean
 	@echo "Suppression de l'VM [${GREEN}OK${NC}]"
 

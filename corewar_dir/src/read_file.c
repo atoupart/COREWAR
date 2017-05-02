@@ -10,7 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include "../inc/corewar.h"
+
+void	verif_size_champs(t_champ *champ, int ret, int fd)
+{
+	int len;
+	int tmp;
+	char	*str[BUFF_SIZE + 1];
+
+	len = 0;
+	lseek(fd, 2192, SEEK_SET);
+	while ((tmp = read(fd, str, BUFF_SIZE)))
+		len += tmp;
+
+	while (champ->next)
+		champ = champ->next;
+	if (champ->nb_octet > CHAMP_MAX_SIZE)
+	{
+		ret = champ->nb_octet - CHAMP_MAX_SIZE;
+		ft_printf(C_RED"Error: Le joueur %d(%s) est trop grand de %d octets.\n"
+			C_NONE, champ->id_champ, champ->name, ret);
+		exit(1);
+	}
+	if (len != champ->nb_octet)
+		ft_error(
+			"Error: File has a code size differ from what its header says");
+}
 
 void	read_file(int fd, t_champ **champ, int id_champ)
 {
@@ -27,19 +53,15 @@ void	read_file(int fd, t_champ **champ, int id_champ)
 	lseek(fd, 0, SEEK_SET);
 	read(fd, file, champ_len);
 	file[champ_len] = '\0';
-	if (file[0] != (char)0x00 || file[1] != (char)0xea || file[2] != (char)0x83 
+	if (file[0] != (char)0x00 || file[1] != (char)0xea || file[2] != (char)0x83
 			|| file[3] != (char)0xf3)
 		ft_error("Error: Wrong magic number");
+	if (file[2188] != 0 || file[2189] != 0 ||
+		file[2190] != 0 || file[2191] != 0)
+		ft_error("Error : Wrong .cor");
 	get_champion_header(file, champ_len, champ, id_champ);
-	ft_printf("ici\n");
 	free(file);
-	if ((*champ)->nb_octet > CHAMP_MAX_SIZE)
-	{
-		ret = (*champ)->nb_octet - CHAMP_MAX_SIZE;
-		ft_printf(C_RED"Error: Le joueur %d(%s) est trop grand de %d octets.\n"
-			C_NONE, (*champ)->id_champ, (*champ)->name, ret);
-		exit(1);
-	}
+	verif_size_champs(*champ, ret, fd);
 }
 
 char	*get_champion_file(char *file, int nb_octet, int i, int champ_len)
@@ -71,6 +93,8 @@ int		get_nb_octet(char *file, int i)
 	ret = 0;
 	while (file[n++] == 0)
 		nb++;
+	if (n < 138 || (nb = 8 - nb) < 0 || nb > 6)
+		ft_error("Error : Wrong .cor");
 	nb = 8 - nb;
 	power = 0;
 	while (nb--)
