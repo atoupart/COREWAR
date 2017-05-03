@@ -15,15 +15,14 @@
 
 void	verif_size_champs(t_champ *champ, int ret, int fd)
 {
-	int len;
-	int tmp;
+	int		len;
+	int		tmp;
 	char	*str[BUFF_SIZE + 1];
 
 	len = 0;
 	lseek(fd, 2192, SEEK_SET);
 	while ((tmp = read(fd, str, BUFF_SIZE)))
 		len += tmp;
-
 	while (champ->next)
 		champ = champ->next;
 	if (champ->nb_octet > CHAMP_MAX_SIZE)

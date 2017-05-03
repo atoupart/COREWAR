@@ -36,8 +36,8 @@ re:
 	@make -C $(WAR_PATH) re
 
 tests: all
-	@cp ./asm/asm ./tests
-	@cp ./corewar/corewar ./tests
+	@cp ./asm ./tests
+	@cp ./corewar ./tests
 	@sh ./tests/ressources/main_test.sh $(OPT)
 
 clean_tests:

@@ -25,7 +25,7 @@ int		count_apos(char *line)
 			ret++;
 		i++;
 	}
-return (ret);
+	return (ret);
 }
 
 int		check_name(char **line, int *name)
